@@ -87,7 +87,28 @@ public class Menu {
     }
 
     public void myPage(){
-        System.out.print("[1] Follower: "+ app.getActiveUser());
+        System.out.print("[1] Follower: "+ app.getActiveUser().getPage().getN_follower() + "\t");
+        System.out.println("[2] Following: "+ app.getActiveUser().getPage().getN_following());
+        System.out.println("[3]:Change information\n[4]:Posts");
+
+        try {
+            switch (input.nextInt()){
+                case 1:
+                    //follower
+                case 2:
+                    //following
+                case 3:
+                    //change information
+                case 4:
+                    //show all post
+                default:
+                    System.err.print("invalid argument! try again.\n");
+                    start();
+            }
+        }catch (Exception e){
+            System.err.print("[ERROR]:check your input argument and try again! \n");
+            start();
+        }
     }
 
 
