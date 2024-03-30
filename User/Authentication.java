@@ -48,4 +48,24 @@ public class Authentication {
 
     }
 
+    public void signUp(App app){
+
+        User user1;
+        System.out.println("Please complete the information below.");
+        System.out.print("name: ");
+        String name = Menu.input.next();
+        System.out.print("\nlast name: ");
+        String lastName = Menu.input.next();
+        System.out.print("\nId: ");
+        String id = Menu.input.next();
+        System.out.print("\npassword: ");
+        String password = Menu.input.next();
+        System.out.print("\nyour email address: ");
+        String email = Menu.input.next();
+        user1 = new User(name,lastName,id,password,email);
+        app.addUser(user1);
+        App.menu.start(app);
+
+    }
+
 }

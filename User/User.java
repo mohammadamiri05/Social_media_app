@@ -14,7 +14,18 @@ public class User {
     private Page page;
     private PrivateChat[] chat_box;
 
-    //________________________________________-setter and getter :(
+
+
+
+    public User(String name, String last_name, String id, String password, String email) {
+        this.name = name;
+        this.last_name = last_name;
+        this.id = id;
+        this.password = password;
+        this.email = email;
+    }
+
+//________________________________________ setter and getter :(
 
 
     public String getName() {

@@ -18,7 +18,7 @@ public class Menu {
                 case 1:
                     App.authentication.signIn(app);
                 case 2:
-                    //Authentication.signUp
+                    App.authentication.signUp(app);
                 default:
                     System.err.print("invalid argument! try again.\n");
                     start(app);
@@ -32,7 +32,6 @@ public class Menu {
     public void printFooter(){
         System.out.print("[0]:Exit\t[-1]:Home\t[-2]:My page\t[-3]:Search\t[-4]Private chat\n");
     }
-
     public void footer( int choice , App app){
         try {
             switch (choice){
@@ -57,6 +56,7 @@ public class Menu {
             //home
         }
     }
+
     public void home(App app){
         printFooter();
         //show 5 top post and footer

@@ -39,6 +39,16 @@ public class App {
 
     //____________________________________________________ )
 
+    public void addUser(User user){
+
+        for (int i = 0; i < this.users.length; i++) {
+            if (users[i] == null){
+                this.users[i] = user;
+                break;
+            }
+        }
+    }
+
 
 
 
