@@ -1,24 +1,14 @@
 package Main;
 import User.*;
 import Account.*;
-
-import java.io.Console;
 import java.util.Scanner;
 
 public class Menu {
 
     public  static Scanner input = new Scanner(System.in);
-    private App app;
-    private Authentication authentication;
 
 
-    public Menu(App app , Authentication authentication){
-        this.app = app;
-        this.authentication = authentication;
-    }
-
-
-    public void start(){
+    public void start(App app){
 
         System.out.print("[0]:Exit.\n[1]:Sign in.\n[2]:Sign up.\nPlease enter your choice: ");
         try {
@@ -26,16 +16,16 @@ public class Menu {
                 case 0:
                     System.exit(0);//we should test this
                 case 1:
-                    //Authentication.signIn
+                    App.authentication.signIn(app);
                 case 2:
                     //Authentication.signUp
                 default:
                     System.err.print("invalid argument! try again.\n");
-                    start();
+                    start(app);
             }
         }catch (Exception e){
             System.err.print("[ERROR]:check your input argument and try again! \n");
-            start();
+            start(app);
         }
     }
 
@@ -43,16 +33,16 @@ public class Menu {
         System.out.print("[0]:Exit\t[-1]:Home\t[-2]:My page\t[-3]:Search\t[-4]Private chat\n");
     }
 
-    public void footer( int choice ){
+    public void footer( int choice , App app){
         try {
             switch (choice){
                 case 0:
-                    start();
+                    start(app);
                 case -1:
-                    //home
+                    home(app);
                     break;
                 case -2:
-                    //myPage
+                    myPage(app);
                     break;
                 case -3:
                     //search
@@ -67,7 +57,7 @@ public class Menu {
             //home
         }
     }
-    public void home(){
+    public void home(App app){
         printFooter();
         //show 5 top post and footer
 
@@ -78,15 +68,15 @@ public class Menu {
                 //show post [choice]
             }
             else {
-                footer(choice);
+                footer(choice , app);
             }
         }catch (Exception e){
             System.err.print("[ERROR]:check your input argument and try again! \n");
-            home();
+            home(app);
         }
     }
 
-    public void myPage(){
+    public void myPage(App app){
         System.out.print("[1] Follower: "+ app.getActiveUser().getPage().getN_follower() + "\t");
         System.out.println("[2] Following: "+ app.getActiveUser().getPage().getN_following());
         System.out.println("[3]:Change information\n[4]:Posts");
@@ -103,11 +93,11 @@ public class Menu {
                     //show all post
                 default:
                     System.err.print("invalid argument! try again.\n");
-                    start();
+                    home(app);
             }
         }catch (Exception e){
             System.err.print("[ERROR]:check your input argument and try again! \n");
-            start();
+            home(app);
         }
     }
 
