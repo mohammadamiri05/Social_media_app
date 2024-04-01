@@ -23,6 +23,7 @@ public class User {
         this.id = id;
         this.password = password;
         this.email = email;
+        this.page = new Page(100,100,100);
     }
 
 //________________________________________ setter and getter :(

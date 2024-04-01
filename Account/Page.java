@@ -93,4 +93,14 @@ public class Page {
         }
     }
 
+    public void addPost(String text , boolean comments){
+        for (int i = 0; i < posts.length; i++) {
+            if (posts[i] != null ){
+                posts[i] = new Post(text , comments);
+            }
+        }
+    }
+
+
+
 }

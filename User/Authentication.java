@@ -5,7 +5,7 @@ import Main.Menu;
 public class Authentication {
 
     private String activeId;
-    private User activeUser;
+    private User activeUser ;
 
     private String collectID;
     private User collectUser;

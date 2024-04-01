@@ -15,11 +15,14 @@ public class Menu {
                     System.exit(0);//we should test this
                 case 1:
                     App.authentication.signIn(app);
+                    break;
                 case 2:
                     App.authentication.signUp(app);
+                    break;
                 default:
                     System.err.print("invalid argument! try again.\n");
                     start(app);
+                    break;
             }
         }catch (Exception e){
             System.err.print("[ERROR]:check your input argument and try again! \n");
@@ -35,6 +38,7 @@ public class Menu {
             switch (choice){
                 case 0:
                     start(app);
+                    break;
                 case -1:
                     home(app);
                     break;
@@ -50,8 +54,8 @@ public class Menu {
 
             }
         }catch (Exception e){
-            System.err.print("[ERROR]:check your input argument and try again! \n");
-            //home
+            System.err.print("[ERROR]:check your input argument and try again! FOOTER\n");
+            home(app);
         }
     }
 
@@ -69,38 +73,55 @@ public class Menu {
                 footer(choice , app);
             }
         }catch (Exception e){
-            System.err.print("[ERROR]:check your input argument and try again! \n");
+            System.err.print("[ERROR]:check your input argument and try again! HOME\n");
             home(app);
         }
     }
 
     public void myPage(App app){
-        System.out.print("[1] Follower: "+ App.authentication.getActiveUser().getPage().getN_follower() + "\t");
+        System.out.println("______________________________");
+        System.out.print("[1] Follower: "+ App.authentication.getActiveUser().getPage().getN_follower() + "\n");
         System.out.println("[2] Following: "+ App.authentication.getActiveUser().getPage().getN_following());
-        System.out.println("[3]:Change information\n[4]:Posts");
+        System.out.println("[3]:Change information\n[4]:My Posts\n[5]:Add new post");
 
         try {
             switch (input.nextInt()){
                 case 1:
                     App.authentication.getActiveUser().getPage().showFollower(app);
+                    break;
                 case 2:
                     App.authentication.getActiveUser().getPage().showFollowing(app);
+                    break;
                 case 3:
                     //change information
+                    break;
                 case 4:
                     //show all post
+                    break;
+                case 5:
+                    addPost(app);
+                    break;
                 default:
                     System.err.print("invalid argument! try again.\n");
                     home(app);
+                    break;
             }
         }catch (Exception e){
-            System.err.print("[ERROR]:check your input argument and try again! \n");
+            System.err.print("[ERROR]:check your input argument and try again! MYPAGE\n");
             home(app);
         }
     }
 
-    public void follower(App app){
-
+    public void addPost(App app){
+        System.out.print("enter your text:\n");
+        String text = input.nextLine();
+        System.out.println("[0]:comments ON\t\t[1]:comments OFF");
+        int comment = input.nextInt();
+        if(comment == 0 ){
+            App.authentication.getActiveUser().getPage().addPost(text,true);
+        }else {
+            App.authentication.getActiveUser().getPage().addPost(text,false);
+        }
     }
 
 
