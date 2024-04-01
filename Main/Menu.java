@@ -75,8 +75,8 @@ public class Menu {
     }
 
     public void myPage(App app){
-        System.out.print("[1] Follower: "+ app.getActiveUser().getPage().getN_follower() + "\t");
-        System.out.println("[2] Following: "+ app.getActiveUser().getPage().getN_following());
+        System.out.print("[1] Follower: "+ App.authentication.getActiveUser().getPage().getN_follower() + "\t");
+        System.out.println("[2] Following: "+ App.authentication.getActiveUser().getPage().getN_following());
         System.out.println("[3]:Change information\n[4]:Posts");
 
         try {
@@ -84,7 +84,7 @@ public class Menu {
                 case 1:
                     App.authentication.getActiveUser().getPage().showFollower(app);
                 case 2:
-                    //following
+                    App.authentication.getActiveUser().getPage().showFollowing(app);
                 case 3:
                     //change information
                 case 4:

@@ -13,6 +13,13 @@ public class Page {
     private int n_following;
 
 
+    public Page( int nPost , int nFollower , int nFollowing ){
+        this.posts = new Post[nPost];
+        this.follower = new User[nFollower];
+        this.following = new User[nFollowing];
+    }
+
+
 
     //________________________________________ setter and getter :(
 

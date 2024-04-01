@@ -6,20 +6,18 @@ public class App {
 
     private User[] users;
     private Post[] top_post;
-    private User activeUser;
     public static Authentication authentication = new Authentication();
     public static Menu menu = new Menu();
 
 
 
-    //________________________________________ S & G :(
-    public User getActiveUser() {
-        return activeUser;
+    public App( int nUser , int nPost ){
+        this.users = new User[nUser];
+        this.top_post = new Post[nPost];
     }
 
-    public void setActiveUser(User activeUser) {
-        this.activeUser = activeUser;
-    }
+
+    //________________________________________ S & G :(
 
     public User[] getUsers() {
         return users;
