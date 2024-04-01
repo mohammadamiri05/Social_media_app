@@ -1,5 +1,5 @@
 package Account;
-
+import Main.*;
 import User.*;
 
 public class Page {
@@ -14,7 +14,7 @@ public class Page {
 
 
 
-    //________________________________________-setter and getter :(
+    //________________________________________ setter and getter :(
 
     public String getBio() {
         return bio;
@@ -74,5 +74,16 @@ public class Page {
 
 
     //________________________________________ )
+
+    public void showFollower( App app){
+        for (int i = 0; i < n_follower; i++) {
+            System.out.printf("[%d]:%s\n",i+1,follower[i].getId());
+        }
+    }
+    public void showFollowing( App app){
+        for (int i = 0; i < n_following; i++) {
+            System.out.printf("[%d]:%s\n",i+1,following[i].getId());
+        }
+    }
 
 }

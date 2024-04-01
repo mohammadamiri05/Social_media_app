@@ -87,4 +87,13 @@ public class User {
 
 
     //_______________________________________ )
+
+
+    public void showFollower( App app){
+        page.showFollower(app);
+    }
+    public void showFollowing( App app){
+        page.showFollowing(app);
+    }
+
 }

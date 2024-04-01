@@ -1,6 +1,4 @@
 package Main;
-import User.*;
-import Account.*;
 import java.util.Scanner;
 
 public class Menu {
@@ -84,7 +82,7 @@ public class Menu {
         try {
             switch (input.nextInt()){
                 case 1:
-                    //follower
+                    App.authentication.getActiveUser().getPage().showFollower(app);
                 case 2:
                     //following
                 case 3:
@@ -101,7 +99,9 @@ public class Menu {
         }
     }
 
+    public void follower(App app){
 
+    }
 
 
 

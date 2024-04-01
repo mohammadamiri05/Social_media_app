@@ -5,7 +5,10 @@ import Main.Menu;
 public class Authentication {
 
     private String activeId;
-    private User user;
+    private User activeUser;
+
+    private String collectID;
+    private User collectUser;
 
     //____________________________________ G & S :(
     public String getActiveId() {
@@ -16,12 +19,12 @@ public class Authentication {
         this.activeId = activeId;
     }
 
-    public User getUser() {
-        return user;
+    public User getActiveUser() {
+        return activeUser;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setActiveUser(User activeUser) {
+        this.activeUser = activeUser;
     }
 
     //________________________________________ )
@@ -37,7 +40,7 @@ public class Authentication {
                 if (app.getUsers()[i].getPassword().equals(password) ){
                     System.out.println("your registration has been successful:)");
                     this.activeId = id;
-                    this.user = app.getUsers()[i];
+                    this.activeUser = app.getUsers()[i];
                     App.menu.home(app);
                     return;
                 }
