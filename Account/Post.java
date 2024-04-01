@@ -7,12 +7,14 @@ public class Post {
     private String text;
     private int like;
     private String[] comments;
+    private int n_comments;
 
 
     public Post(String text , boolean comments ){
 
         this.text = text;
         this.like = 0;
+        this.n_comments = 0;
         if (comments){
             this.comments = new String[10];
         }else {
@@ -20,6 +22,7 @@ public class Post {
         }
     }
 
+    //_____________________________________________ S&G :(
 
     public String getText() {
         return text;
@@ -45,7 +48,18 @@ public class Post {
         this.comments = comments;
     }
 
-    public void showPost( User user){
+    public int getN_comments() {
+        return n_comments;
+    }
+
+    public void setN_comments(int n_comments) {
+        this.n_comments = n_comments;
+    }
+
+    //_____________________________________________________ )
+
+
+    public void showPost(User user){
         System.out.println(user.getId());
         System.out.println(this.text);
         System.out.println("_________________________________________________");

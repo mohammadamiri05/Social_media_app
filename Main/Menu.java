@@ -32,6 +32,7 @@ public class Menu {
 
     public void printFooter(){
         System.out.print("[0]:Exit\t[-1]:Home\t[-2]:My page\t[-3]:Search\t[-4]Private chat\n");
+        System.out.println("------------------------------------------------");
     }
     public void footer( int choice , App app){
         try {
@@ -79,13 +80,18 @@ public class Menu {
     }
 
     public void myPage(App app){
-        System.out.println("______________________________");
-        System.out.print("[1] Follower: "+ App.authentication.getActiveUser().getPage().getN_follower() + "\n");
+        printFooter();
+        System.out.println("[1] Follower: "+ App.authentication.getActiveUser().getPage().getN_follower());
         System.out.println("[2] Following: "+ App.authentication.getActiveUser().getPage().getN_following());
         System.out.println("[3]:Change information\n[4]:My Posts\n[5]:Add new post");
 
         try {
-            switch (input.nextInt()){
+            int choice = input.nextInt();
+            if (choice <= 0 ){
+                footer(choice,app);
+                return;
+            }
+            switch (choice){
                 case 1:
                     App.authentication.getActiveUser().getPage().showFollower(app);
                     break;
@@ -96,10 +102,11 @@ public class Menu {
                     //change information
                     break;
                 case 4:
-                    //show all post
+                    showPosts(app);
                     break;
                 case 5:
-                    addPost(app);
+                    addPost();
+                    myPage(app);
                     break;
                 default:
                     System.err.print("invalid argument! try again.\n");
@@ -112,15 +119,55 @@ public class Menu {
         }
     }
 
-    public void addPost(App app){
+    public void addPost(){
         System.out.print("enter your text:\n");
+        input.nextLine();
         String text = input.nextLine();
-        System.out.println("[0]:comments ON\t\t[1]:comments OFF");
+
+        System.out.println("[0]:Back\n[1]:comments ON\t\t[2]:comments OFF");
         int comment = input.nextInt();
-        if(comment == 0 ){
+        if (comment == 0 ){
+            System.err.println("Post not added!");
+        }
+        else if(comment == 1 ){
             App.authentication.getActiveUser().getPage().addPost(text,true);
-        }else {
+            System.out.println("Post added");
+        }
+        else {
             App.authentication.getActiveUser().getPage().addPost(text,false);
+            System.out.println("Post added");
+        }
+    }
+
+    public void showPosts(App app){
+        printFooter();
+        App.authentication.getActiveUser().getPage().showAllPost();
+        System.out.print("Enter your choice: ");
+
+        try {
+            int choice = input.nextInt();
+            if(choice > 0 ){
+                collectPost(choice - 1 , app );
+            }
+            else {
+                footer(choice , app);
+            }
+        }catch (Exception e){
+            System.err.print("[ERROR]:check your input argument and try again! HOME\n");
+            home(app);
+        }
+    }
+    public void collectPost(int choice , App app){
+        printFooter();
+        App.authentication.getActiveUser().getPage().getPosts()[choice].showPost(App.authentication.getActiveUser());
+        try {
+            System.out.print("Enter your choice: ");
+            int choice1 = input.nextInt();
+            footer(choice , app);
+
+        }catch (Exception e){
+            System.err.print("[ERROR]:check your input argument and try again! HOME\n");
+            home(app);
         }
     }
 
