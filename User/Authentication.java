@@ -41,6 +41,7 @@ public class Authentication {
                     System.out.println("your registration has been successful:)");
                     this.activeId = id;
                     this.activeUser = app.getUsers()[i];
+                    App.menu.setActiveUser(App.authentication.getActiveUser());
                     App.menu.home(app);
                     return;
                 }
@@ -71,4 +72,17 @@ public class Authentication {
 
     }
 
+    public void changPassword(App app){
+        System.out.print("Enter your new password: ");
+        String password1 = Menu.input.next();
+        System.out.print("Enter your new password: ");
+        String password2 = Menu.input.next();
+        if (password1.equals(password2)){
+            System.out.println("your password changed.");
+        }
+        else {
+            System.err.println("[ERROR]:your passwords not same! password do not chang.");
+        }
+
+    }
 }

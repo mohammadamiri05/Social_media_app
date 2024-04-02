@@ -83,19 +83,21 @@ public class Page {
     //________________________________________ )
 
     public void showFollower( App app){
+        System.out.println("Followers:");
         for (int i = 0; i < n_follower; i++) {
             System.out.printf("[%d]:%s\n",i+1,follower[i].getId());
         }
     }
     public void showFollowing( App app){
+        System.out.println("Followings:");
         for (int i = 0; i < n_following; i++) {
             System.out.printf("[%d]:%s\n",i+1,following[i].getId());
         }
     }
 
     public void addPost(String text , boolean comments){
-        for (int i = 0; i < posts.length; i++) {
-            if (posts[i] != null ){
+        for (int i = 0; i < this.posts.length; i++) {
+            if (this.posts[i] == null ){
                 posts[i] = new Post(text , comments);
                 break;
             }
@@ -103,9 +105,9 @@ public class Page {
     }
 
     public void showAllPost(){
-        for (int i = 0; i < posts.length; i++) {
-            if (posts[i] != null ){
-                System.out.printf("[%d]:%s",(i+1),posts[i].getText());
+        for (int i = 0; i < this.posts.length; i++) {
+            if (this.posts[i] != null ){
+                System.out.printf("[%d]:%s\n",(i+1),this.posts[i].getText());
                 System.out.printf("Like:%s\t\tcomments:%s\n",posts[i].getLike(),posts[i].getN_comments());
                 System.out.println("-----------------------------------------------");
             }

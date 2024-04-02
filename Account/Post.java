@@ -18,7 +18,7 @@ public class Post {
         if (comments){
             this.comments = new String[10];
         }else {
-            this.comments = new String[0];
+            this.comments = new String[1];
         }
     }
 

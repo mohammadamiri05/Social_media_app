@@ -97,4 +97,15 @@ public class User {
         page.showFollowing(app);
     }
 
+    public void changeName(){
+
+        System.out.print("Enter your new name: ");
+        this.name = Menu.input.next() ;
+    }
+
+    public void changeLastname(){
+        System.out.print("Enter your new lastname: ");
+        this.last_name = Menu.input.next();
+    }
+
 }
