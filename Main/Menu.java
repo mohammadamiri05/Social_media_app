@@ -1,7 +1,6 @@
 package Main;
 import User.User;
 
-import java.lang.reflect.AccessFlag;
 import java.util.Scanner;
 
 public class Menu {
@@ -65,7 +64,7 @@ public class Menu {
                     myPage(app);
                     break;
                 case -3:
-                    //search
+                    searchUser(app);
                     break;
                 case -4:
                     //privateChat
@@ -120,7 +119,7 @@ public class Menu {
                     information(app);
                     break;
                 case 4:
-                    showPosts(app);
+                    showPage(app , activeUser);
                     break;
                 case 5:
                     addPost();
@@ -133,6 +132,17 @@ public class Menu {
             }
         }catch (Exception e){
             System.err.print("[ERROR]:check your input argument and try again! MYPAGE\n");
+            home(app);
+        }
+    }
+
+    public void searchUser(App app){
+        try {
+            System.out.print("Please enter that page id: ");
+            app.searchUser(input.next() , app);
+
+        }catch (Exception e){
+            System.err.print("[ERROR]:check your input argument and try again! SEARCH\n");
             home(app);
         }
     }
@@ -157,15 +167,18 @@ public class Menu {
         }
     }
 
-    public void showPosts(App app){
+    public void showPage(App app , User user){
         printFooter();
-        App.authentication.getActiveUser().getPage().showAllPost();
+        System.out.println(user.getId());
+        System.out.println("--------");
+        System.out.println(user.getPage().getBio());
+        user.getPage().showAllPost();
 
         try {
             System.out.print("Enter your choice: ");
             int choice = input.nextInt();
             if(choice > 0 ){
-                collectPost(choice - 1 , app );
+                exitFromPost(choice - 1 , user , app );
             }
             else {
                 footer(choice , app);
@@ -175,9 +188,9 @@ public class Menu {
             home(app);
         }
     }
-    public void collectPost(int choice , App app){
+    public void exitFromPost(int choice , User user, App app){
         printFooter();
-        activeUser.getPage().getPosts()[choice].showPost(activeUser);
+        user.getPage().getPosts()[choice].showPost(user);
         try {
             System.out.print("Enter your choice: ");
             int choice1 = input.nextInt();

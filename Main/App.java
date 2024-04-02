@@ -47,6 +47,15 @@ public class App {
         }
     }
 
+    public void searchUser(String id , App app){
+        for (int i = 0; i < this.users.length; i++) {
+            if (this.users[i] != null && this.users[i].getId().equals(id)){
+                App.menu.showPage(app , this.users[i]);
+                return;
+            }
+        }
+    }
+
 
 
 
