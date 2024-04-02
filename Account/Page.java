@@ -14,6 +14,7 @@ public class Page {
 
 
     public Page( int nPost , int nFollower , int nFollowing ){
+        this.bio = "Bio";
         this.posts = new Post[nPost];
         this.follower = new User[nFollower];
         this.following = new User[nFollowing];

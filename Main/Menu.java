@@ -99,8 +99,8 @@ public class Menu {
 
     public void myPage(App app){
         printFooter();
-        System.out.println("[1] Follower: "+ App.authentication.getActiveUser().getPage().getN_follower());
-        System.out.println("[2] Following: "+ App.authentication.getActiveUser().getPage().getN_following());
+        System.out.println("[1] Follower: "+ activeUser.getPage().getN_follower());
+        System.out.println("[2] Following: "+ activeUser.getPage().getN_following());
         System.out.println("[3]:Change information\n[4]:My Posts\n[5]:Add new post");
 
         try {
@@ -111,10 +111,10 @@ public class Menu {
             }
             switch (choice){
                 case 1:
-                    App.authentication.getActiveUser().getPage().showFollower(app);
+                    activeUser.getPage().showFollower(app);
                     break;
                 case 2:
-                    App.authentication.getActiveUser().getPage().showFollowing(app);
+                    activeUser.getPage().showFollowing(app);
                     break;
                 case 3:
                     information(app);
@@ -193,7 +193,8 @@ public class Menu {
 
         printFooter();
         System.out.printf("[1]:%s\n[2]:%s\n[3]:change password\n",activeUser.getName(),activeUser.getLast_name());
-        System.out.printf("[4]:%s\n",activeUser.getEmail());
+        System.out.printf("[4]:%s\n[5]:%s\n",activeUser.getEmail(),activeUser.getPage().getBio());
+        System.out.print("Please enter your choice: ");
 
         try {
             int choice = input.nextInt();
@@ -216,6 +217,11 @@ public class Menu {
                 case 4:
                     System.out.print("Enter your new email address: ");
                     activeUser.setEmail(input.next());
+                    break;
+                case 5:
+                    System.out.println("Enter your bio: ");
+                    input.nextLine();
+                    activeUser.getPage().setBio(input.nextLine());
                     break;
                 default:
                     System.err.print("invalid argument! try again.\n");
