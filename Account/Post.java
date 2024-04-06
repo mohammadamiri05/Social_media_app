@@ -6,6 +6,7 @@ public class Post {
 
     private String text;
     private int like;
+    private String[] idLikedPost;
     private String[] comments;
     private int n_comments;
 
@@ -63,7 +64,7 @@ public class Post {
         System.out.println(user.getId());
         System.out.println(this.text);
         System.out.println("_________________________________________________");
-        if (this.comments.length < 1){
+        if (this.comments.length < 3 ){
             System.out.println("you could not send any comments for this post.");
             return;
         }
@@ -73,5 +74,11 @@ public class Post {
                 System.out.println("-----------------------");
             }
         }
+    }
+
+    public void likePost(){
+
+        this.like++;
+
     }
 }

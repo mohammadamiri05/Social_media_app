@@ -1,5 +1,5 @@
 package Main;
-import User.User;
+import User.*;
 
 import java.util.Scanner;
 
@@ -7,21 +7,9 @@ public class Menu {
 
     public  static Scanner input = new Scanner(System.in);
 
-    private User activeUser ;
 
 
-
-    //____________________________________________________ G&S :(
-
-    public User getActiveUser() {
-        return activeUser;
-    }
-
-    public void setActiveUser(User activeUser) {
-        this.activeUser = activeUser;
-    }
-
-    //______________________________________________________ )
+    //______________________________________________________
 
     public void start(App app){
 
@@ -98,8 +86,8 @@ public class Menu {
 
     public void myPage(App app){
         printFooter();
-        System.out.println("[1] Follower: "+ activeUser.getPage().getN_follower());
-        System.out.println("[2] Following: "+ activeUser.getPage().getN_following());
+        System.out.println("[1] Follower: "+ Authentication.activeUser.getPage().getN_follower());
+        System.out.println("[2] Following: "+ Authentication.activeUser.getPage().getN_following());
         System.out.println("[3]:Change information\n[4]:My Posts\n[5]:Add new post");
 
         try {
@@ -110,16 +98,16 @@ public class Menu {
             }
             switch (choice){
                 case 1:
-                    activeUser.getPage().showFollower(app);
+                    Authentication.activeUser.getPage().showFollower(app);
                     break;
                 case 2:
-                    activeUser.getPage().showFollowing(app);
+                    Authentication.activeUser.getPage().showFollowing(app);
                     break;
                 case 3:
                     information(app);
                     break;
                 case 4:
-                    showPage(app , activeUser);
+                    showPage(app , Authentication.activeUser);
                     break;
                 case 5:
                     addPost();
@@ -205,8 +193,10 @@ public class Menu {
     public void information(App app) {
 
         printFooter();
-        System.out.printf("[1]:%s\n[2]:%s\n[3]:change password\n",activeUser.getName(),activeUser.getLast_name());
-        System.out.printf("[4]:%s\n[5]:%s\n",activeUser.getEmail(),activeUser.getPage().getBio());
+        System.out.printf("[1]:%s\n",Authentication.activeUser.getName());
+        System.out.printf("[2]:%s\n[3]:change password\n",Authentication.activeUser.getLast_name());
+        System.out.printf("[4]:%s\n",Authentication.activeUser.getEmail());
+        System.out.printf("[5]:%s\n",Authentication.activeUser.getPage().getBio());
         System.out.print("Please enter your choice: ");
 
         try {
@@ -218,23 +208,23 @@ public class Menu {
             switch (choice){
                 case 1:
                     System.out.print("Enter your new name: ");
-                    activeUser.setName(input.next());
+                    Authentication.activeUser.setName(input.next());
                     break;
                 case 2:
                     System.out.print("Enter your new lastname: ");
-                    activeUser.setLast_name(input.next());
+                    Authentication.activeUser.setLast_name(input.next());
                     break;
                 case 3:
                     App.authentication.changPassword(app);
                     break;
                 case 4:
                     System.out.print("Enter your new email address: ");
-                    activeUser.setEmail(input.next());
+                    Authentication.activeUser.setEmail(input.next());
                     break;
                 case 5:
                     System.out.println("Enter your bio: ");
                     input.nextLine();
-                    activeUser.getPage().setBio(input.nextLine());
+                    Authentication.activeUser.getPage().setBio(input.nextLine());
                     break;
                 default:
                     System.err.print("invalid argument! try again.\n");

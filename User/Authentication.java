@@ -4,8 +4,8 @@ import Main.Menu;
 
 public class Authentication {
 
-    private String activeId;
-    private User activeUser ;
+    public static String activeId;
+    public static User activeUser ;
 
     private String collectID;
     private User collectUser;
@@ -16,7 +16,7 @@ public class Authentication {
     }
 
     public void setActiveId(String activeId) {
-        this.activeId = activeId;
+        Authentication.activeId = activeId;
     }
 
     public User getActiveUser() {
@@ -24,7 +24,7 @@ public class Authentication {
     }
 
     public void setActiveUser(User activeUser) {
-        this.activeUser = activeUser;
+        Authentication.activeUser = activeUser;
     }
 
     //________________________________________ )
@@ -39,9 +39,8 @@ public class Authentication {
             if (app.getUsers()[i] != null && app.getUsers()[i].getId().equals(id) ){
                 if (app.getUsers()[i].getPassword().equals(password) ){
                     System.out.println("your registration has been successful:)");
-                    this.activeId = id;
-                    this.activeUser = app.getUsers()[i];
-                    App.menu.setActiveUser(App.authentication.getActiveUser());
+                    Authentication.activeId = id;
+                    Authentication.activeUser = app.getUsers()[i];
                     App.menu.home(app);
                     return;
                 }
@@ -60,7 +59,7 @@ public class Authentication {
         String name = Menu.input.next();
         System.out.print("\nlast name: ");
         String lastName = Menu.input.next();
-        System.out.print("\nId: ");
+        System.out.print("\nUser name: ");
         String id = Menu.input.next();
         System.out.print("\npassword: ");
         String password = Menu.input.next();
