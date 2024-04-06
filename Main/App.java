@@ -56,6 +56,24 @@ public class App {
         }
     }
 
+    public void getTopPost(){
+        int max = 0 ;
+        for (int i = 0; i < users.length; i++) {
+            if (users[i] != null){
+                //it will complete
+            }
+        }
+    }
+    public void showTopPost(){
+        for (int i = 0; i < this.top_post.length; i++) {
+            if (top_post[i] != null ){
+                System.out.printf("[%d]:%s\n",(i+1),top_post[i].getText());
+                System.out.printf("Like:%s\t\tcomments:%s\n",top_post[i].getLike(),top_post[i].getN_comments());
+                System.out.println("-----------------------------------------------");
+            }
+        }
+    }
+
 
 
 

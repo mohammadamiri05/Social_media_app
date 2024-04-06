@@ -67,13 +67,12 @@ public class Menu {
 
     public void home(App app){
         printFooter();
-        //show 5 top post and footer
 
         System.out.print("Please enter your choice: ");
         try {
             int choice = input.nextInt();
             if(choice > 0 ){
-                //show post [choice]
+                app.showTopPost();
             }
             else {
                 footer(choice , app);
@@ -157,8 +156,16 @@ public class Menu {
 
     public void showPage(App app , User user){
         printFooter();
-        System.out.println(user.getId());
-        System.out.println("--------");
+        if (user.getId().equals(Authentication.activeId)){
+            System.out.println("--------");
+        }
+        else {
+            System.out.println(user.getId());
+            System.out.println("-------- [-7]:Follow -------- [-8]:Unfollow --------");
+        }
+
+        System.out.printf("-------- Follower: %d\t\tfollowing: %d--------\n",user.getPage().getN_follower(),user.getPage().getN_following());
+
         System.out.println(user.getPage().getBio());
         user.getPage().showAllPost();
 
@@ -170,6 +177,14 @@ public class Menu {
             }
             else {
                 footer(choice , app);
+                if (choice == -7){
+                    user.getPage().follow(user);
+                    showPage(app,user);
+                }
+                if (choice == -8 ){
+                    user.getPage().unfollow();
+                    showPage(app,user);
+                }
             }
         }catch (Exception e){
             System.err.print("[ERROR]:check your input argument and try again! HOME\n");

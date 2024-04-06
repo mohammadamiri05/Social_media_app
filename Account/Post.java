@@ -6,13 +6,14 @@ public class Post {
 
     private String text;
     private int like;
-    private String[] idLikedPost;
+    private String[] likedPost;
     private String[] comments;
     private int n_comments;
 
 
     public Post(String text , boolean comments ){
 
+        this.likedPost = new String[100];
         this.text = text;
         this.like = 0;
         this.n_comments = 0;
@@ -78,7 +79,20 @@ public class Post {
 
     public void likePost(){
 
+        for (int i = 0; i < this.likedPost.length ; i++) {
+            if (likedPost[i] != null && likedPost[i].equals(Authentication.activeId)){
+                System.out.print("you liked this post before.");
+                return;
+            }
+        }
         this.like++;
+        for (int i = 0; i < likedPost.length; i++) {
+            if (likedPost[i] == null){
+                likedPost[i] = Authentication.activeId;
+                System.out.print("you like this post.");
+                return;
+            }
+        }
 
     }
 }

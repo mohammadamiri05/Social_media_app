@@ -96,13 +96,41 @@ public class Page {
         }
     }
 
-    public void addPost(String text , boolean comments){
-        for (int i = 0; i < this.posts.length; i++) {
-            if (this.posts[i] == null ){
-                posts[i] = new Post(text , comments);
+    public void follow(User user){
+        for (int i = 0; i < follower.length; i++) {
+            if (follower[i] != null){
+                if ( follower[i].getId().equals(Authentication.activeId)) {
+                    System.out.println("you follow this page before!");
+                    break;
+                }
+            }else {
+                follower[n_follower] = Authentication.activeUser;
+                n_follower++;
+                Authentication.activeUser.getPage().following(user);
+                System.out.println("you follow page.");
                 break;
             }
         }
+    }
+
+    public void following(User user){
+        following[n_following] = user;
+        n_following++;
+    }
+
+    public void unfollow(){
+
+    }
+
+
+    public void addPost(String text , boolean comments){
+        this.posts[n_post] = new Post(text , comments);
+        this.n_post++;
+
+    }
+
+    public void deletePost(){
+
     }
 
     public void showAllPost(){
