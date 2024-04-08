@@ -1,6 +1,7 @@
 package Account;
 import Main.*;
 import User.*;
+import Setting.*;
 
 public class Page {
 

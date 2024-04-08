@@ -37,8 +37,11 @@ public class Menu {
     }
 
     public void printFooter(){
-        System.out.print( Color.CYAN + "[0]:Exit\t[-1]:Home\t[-2]:My page\t[-3]:Search\t[-4]:Private chat\n");
-        System.out.println("--------------------------------------------------------------");
+
+        System.out.print( Color.CYAN);
+        System.out.println("------------------------------------------------------------------------");
+        System.out.print("|  [0]:Exit\t[-1]:Home\t[-2]:My page\t[-3]:Search\t[-4]:Private chat  |\n");
+        System.out.println("------------------------------------------------------------------------");
         System.out.print(Color.RESET);
     }
     public void footer( int choice , App app){
@@ -87,10 +90,11 @@ public class Menu {
 
     public void myPage(App app){
         printFooter();
+        System.out.print(Color.YELLOW);
         System.out.println("[1] Follower: "+ Authentication.activeUser.getPage().getN_follower());
         System.out.println("[2] Following: "+ Authentication.activeUser.getPage().getN_following());
         System.out.println("[3]:Change information\n[4]:My Posts\n[5]:Add new post");
-
+        System.out.print(Color.RESET);
         try {
             int choice = input.nextInt();
             if (choice <= 0 ){
@@ -158,18 +162,22 @@ public class Menu {
 
     public void showPage(App app , User user){
         printFooter();
-        if (user.getId().equals(Authentication.activeId)){
-            System.out.println("--------");
-        }
-        else {
-            System.out.println(user.getId());
-            System.out.println("-------- [-7]:Follow -------- [-8]:Unfollow --------");
-        }
-
-        System.out.printf("-------- Follower: %d -------- following: %d--------\n",user.getPage().getN_follower(),user.getPage().getN_following());
-
+        System.out.print(Color.RED);
+        System.out.println(user.getId());
         System.out.println(user.getPage().getBio());
+
+        System.out.print(Color.GREEN);
+        if (user.getId().equals(Authentication.activeId)) {
+
+        }else {
+            System.out.print("-------- [-5]:Follow -------- [-6]:Unfollow -------- ");
+        }
+        System.out.printf("[-7]:Follower: %d -------- [-8]:following: %d-------- \n",user.getPage().getN_follower(),user.getPage().getN_following());
+        System.out.print(Color.RESET);
+
+        System.out.print(Color.BLUE);
         user.getPage().showAllPost();
+        System.out.print(Color.RESET);
 
         try {
             System.out.print("Enter your choice: ");
@@ -179,11 +187,11 @@ public class Menu {
             }
             else {
                 footer(choice , app);
-                if (choice == -7){
+                if (choice == -5){
                     user.getPage().follow(user);
                     showPage(app,user);
                 }
-                if (choice == -8 ){
+                if (choice == -6 ){
                     user.getPage().unfollow();
                     showPage(app,user);
                 }
@@ -210,10 +218,12 @@ public class Menu {
     public void information(App app) {
 
         printFooter();
+        System.out.print(Color.PURPLE);
         System.out.printf("[1]:%s\n",Authentication.activeUser.getName());
         System.out.printf("[2]:%s\n[3]:change password\n",Authentication.activeUser.getLast_name());
         System.out.printf("[4]:%s\n",Authentication.activeUser.getEmail());
         System.out.printf("[5]:%s\n",Authentication.activeUser.getPage().getBio());
+        System.out.print(Color.RESET);
         System.out.print("Please enter your choice: ");
 
         try {

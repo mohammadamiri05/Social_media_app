@@ -1,5 +1,6 @@
 package Account;
 import User.*;
+import Setting.*;
 import  Main.*;
 
 public class Post {
@@ -62,8 +63,11 @@ public class Post {
 
 
     public void showPost(User user){
+        System.out.print(Color.RED);
         System.out.println(user.getId());
+        System.out.print(Color.BLUE);
         System.out.println(this.text);
+        System.out.print(Color.YELLOW);
         System.out.println("_________________________________________________");
         if (this.comments.length < 3 ){
             System.out.println("you could not send any comments for this post.");
@@ -75,6 +79,7 @@ public class Post {
                 System.out.println("-----------------------");
             }
         }
+        System.out.print(Color.RESET);
     }
 
     public void likePost(){

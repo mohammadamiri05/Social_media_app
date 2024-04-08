@@ -31,23 +31,30 @@ public class Authentication {
 
     public void signIn(App app){
 
-        System.out.print("Please enter your Id: ");
-        String id = Menu.input.next();
-        System.out.print("Please enter your password: ");
-        String password = Menu.input.next();
-        for (int i = 0; i < app.getUsers().length; i++) {
-            if (app.getUsers()[i] != null && app.getUsers()[i].getId().equals(id) ){
-                if (app.getUsers()[i].getPassword().equals(password) ){
-                    System.out.println("your registration has been successful:)");
-                    Authentication.activeId = id;
-                    Authentication.activeUser = app.getUsers()[i];
-                    App.menu.home(app);
-                    return;
+        try {
+            System.out.print("Please enter your Id: ");
+            String id = Menu.input.next();
+            System.out.print("Please enter your password: ");
+            String password = Menu.input.next();
+            for (int i = 0; i < app.getUsers().length; i++) {
+                if (app.getUsers()[i] != null && app.getUsers()[i].getId().equals(id) ){
+                    if (app.getUsers()[i].getPassword().equals(password) ){
+                        System.out.println("your registration has been successful:)");
+                        Authentication.activeId = id;
+                        Authentication.activeUser = app.getUsers()[i];
+                        App.menu.home(app);
+                        return;
+                    }
                 }
             }
+            System.err.println("[ERROR]:Incorrect Password or Id!");
+
+        }catch (Exception e){
+            System.err.print("[ERROR]:check your input argument and try again!\n");
+
+        }finally {
+            App.menu.start(app);
         }
-        System.err.println("[ERROR]:Incorrect Password or Id!");
-        App.menu.start(app);
 
     }
 
