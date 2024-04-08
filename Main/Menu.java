@@ -1,5 +1,6 @@
 package Main;
 import User.*;
+import Setting.*;
 
 import java.util.Scanner;
 
@@ -36,8 +37,9 @@ public class Menu {
     }
 
     public void printFooter(){
-        System.out.print("[0]:Exit\t[-1]:Home\t[-2]:My page\t[-3]:Search\t[-4]:Private chat\n");
-        System.out.println("------------------------------------------------");
+        System.out.print( Color.CYAN + "[0]:Exit\t[-1]:Home\t[-2]:My page\t[-3]:Search\t[-4]:Private chat\n");
+        System.out.println("--------------------------------------------------------------");
+        System.out.print(Color.RESET);
     }
     public void footer( int choice , App app){
         try {
@@ -164,7 +166,7 @@ public class Menu {
             System.out.println("-------- [-7]:Follow -------- [-8]:Unfollow --------");
         }
 
-        System.out.printf("-------- Follower: %d\t\tfollowing: %d--------\n",user.getPage().getN_follower(),user.getPage().getN_following());
+        System.out.printf("-------- Follower: %d -------- following: %d--------\n",user.getPage().getN_follower(),user.getPage().getN_following());
 
         System.out.println(user.getPage().getBio());
         user.getPage().showAllPost();

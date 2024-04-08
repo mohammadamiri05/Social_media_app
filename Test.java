@@ -1,6 +1,7 @@
 import Account.*;
 import Main.*;
 import User.*;
+import Setting.*;
 
 public class Test {
 
