@@ -1,4 +1,6 @@
 package Main;
+import Account.Page;
+import Account.Post;
 import User.*;
 import Setting.*;
 
@@ -203,11 +205,24 @@ public class Menu {
     }
     public void exitFromPost(int choice , User user, App app){
         printFooter();
-        user.getPage().getPosts()[choice].showPost(user);
+        Post post = user.getPage().getPosts()[choice];
+        post.showPost(user);
+        System.out.print(Color.PURPLE);
+        System.out.printf("[1]:like:%d\t",post.getLike());
+        System.out.printf("[2]:comments:%d\n",post.getN_comments());
+        System.out.print(Color.RESET);
         try {
             System.out.print("Enter your choice: ");
             int choice1 = input.nextInt();
-            footer(choice1 , app);
+            if (choice1 > 0 ){
+                if (choice1 == 1){
+                    user.getPage().getPosts()[choice].likePost();
+                } else if (choice == 2) {
+                    //comment
+                }
+            }else {
+                footer(choice1 , app);
+            }
 
         }catch (Exception e){
             System.err.print("[ERROR]:check your input argument and try again! HOME\n");

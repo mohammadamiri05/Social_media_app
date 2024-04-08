@@ -94,7 +94,7 @@ public class Post {
         for (int i = 0; i < likedPost.length; i++) {
             if (likedPost[i] == null){
                 likedPost[i] = Authentication.activeId;
-                System.out.print("you like this post.");
+                System.out.println("you like this post.");
                 return;
             }
         }
