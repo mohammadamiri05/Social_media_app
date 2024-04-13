@@ -1,6 +1,5 @@
 package Main;
-import Account.Page;
-import Account.Post;
+import Account.*;
 import User.*;
 import Setting.*;
 
@@ -9,7 +8,6 @@ import java.util.Scanner;
 public class Menu {
 
     public  static Scanner input = new Scanner(System.in);
-
 
 
     //______________________________________________________
@@ -65,6 +63,7 @@ public class Menu {
                     //privateChat
                     break;
 
+
             }
         }catch (Exception e){
             System.err.print("[ERROR]:check your input argument and try again! FOOTER\n");
@@ -90,13 +89,18 @@ public class Menu {
         }
     }
 
-    public void myPage(App app){
-        printFooter();
+    public void printMyPage(){
         System.out.print(Color.YELLOW);
         System.out.println("[1] Follower: "+ Authentication.activeUser.getPage().getN_follower());
         System.out.println("[2] Following: "+ Authentication.activeUser.getPage().getN_following());
         System.out.println("[3]:Change information\n[4]:My Posts\n[5]:Add new post");
         System.out.print(Color.RESET);
+    }
+
+    public void myPage(App app){
+        printFooter();
+        printMyPage();
+
         try {
             int choice = input.nextInt();
             if (choice <= 0 ){
@@ -162,20 +166,41 @@ public class Menu {
         }
     }
 
-    public void showPage(App app , User user){
-        printFooter();
+    public void headerPage(int choice , App app , User user){
+        switch (choice){
+            case -5:
+                user.getPage().follow(user);
+                break;
+            case -6:
+                user.getPage().unfollow();
+                break;
+            case -7:
+                user.showFollower(app);
+                break;
+            case -8:
+                user.showFollowing(app);
+                break;
+        }
+    }
+
+    public void printHeaderPage(User user){
         System.out.print(Color.RED);
         System.out.println(user.getId());
         System.out.println(user.getPage().getBio());
 
         System.out.print(Color.GREEN);
         if (user.getId().equals(Authentication.activeId)) {
-
+            
         }else {
             System.out.print("-------- [-5]:Follow -------- [-6]:Unfollow -------- ");
         }
-        System.out.printf("[-7]:Follower: %d -------- [-8]:following: %d-------- \n",user.getPage().getN_follower(),user.getPage().getN_following());
+        System.out.printf("[-7]:Follower: %d -------- [-8]:following: %d -------- \n",user.getPage().getN_follower(),user.getPage().getN_following());
         System.out.print(Color.RESET);
+    }
+
+    public void showPage(App app , User user){
+        printFooter();
+        printHeaderPage(user);
 
         System.out.print(Color.BLUE);
         user.getPage().showAllPost();
@@ -188,37 +213,39 @@ public class Menu {
                 exitFromPost(choice - 1 , user , app );
             }
             else {
-                footer(choice , app);
-                if (choice == -5){
-                    user.getPage().follow(user);
-                    showPage(app,user);
-                }
-                if (choice == -6 ){
-                    user.getPage().unfollow();
-                    showPage(app,user);
-                }
+                footer(choice,app);
+                headerPage(choice,app,user);
             }
         }catch (Exception e){
             System.err.print("[ERROR]:check your input argument and try again! HOME\n");
             home(app);
         }
     }
-    public void exitFromPost(int choice , User user, App app){
-        printFooter();
+    public void exitFromPost(int choice , User user, App app) {
+
         Post post = user.getPage().getPosts()[choice];
+
+        printFooter();
         post.showPost(user);
+
         System.out.print(Color.PURPLE);
         System.out.printf("[1]:like:%d\t",post.getLike());
         System.out.printf("[2]:comments:%d\n",post.getN_comments());
         System.out.print(Color.RESET);
+
         try {
             System.out.print("Enter your choice: ");
             int choice1 = input.nextInt();
             if (choice1 > 0 ){
                 if (choice1 == 1){
                     user.getPage().getPosts()[choice].likePost();
-                } else if (choice == 2) {
-                    //comment
+                    exitFromPost(choice,user,app);
+                } else if (choice1 == 2) {
+                    System.out.println("CCCCCCCCCCC111111111111111");
+                    comment(post,app);
+                    System.out.println("CCCCCCCCCC2222222222222222");
+                    exitFromPost(choice,user,app);
+
                 }
             }else {
                 footer(choice1 , app);
@@ -230,15 +257,18 @@ public class Menu {
         }
     }
 
-    public void information(App app) {
-
-        printFooter();
+    public void printInformation(){
         System.out.print(Color.PURPLE);
         System.out.printf("[1]:%s\n",Authentication.activeUser.getName());
         System.out.printf("[2]:%s\n[3]:change password\n",Authentication.activeUser.getLast_name());
         System.out.printf("[4]:%s\n",Authentication.activeUser.getEmail());
         System.out.printf("[5]:%s\n",Authentication.activeUser.getPage().getBio());
         System.out.print(Color.RESET);
+    }
+
+    public void information(App app) {
+        printFooter();
+        printInformation();
         System.out.print("Please enter your choice: ");
 
         try {
@@ -279,6 +309,23 @@ public class Menu {
             System.err.print("[ERROR]:check your input argument and try again! MYPAGE\n");
             home(app);
         }
+
+    }
+
+    public void comment(Post post , App app){
+
+        System.out.print("Please enter your comment:\n");
+        try{
+            input.nextLine();
+            String comment = input.nextLine();
+            post.comment(comment);
+
+        }catch (Exception e){
+            System.err.print("[ERROR]:check your input argument and try again! COMMENT\n");
+            home(app);
+        }
+
+
 
     }
 

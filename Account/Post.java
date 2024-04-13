@@ -1,23 +1,24 @@
 package Account;
 import User.*;
 import Setting.*;
-import  Main.*;
 
 public class Post {
 
     private String text;
     private int like;
-    private String[] likedPost;
+    private String[] personLikePost;
     private String[] comments;
     private int n_comments;
+    boolean isValidComment;
 
 
     public Post(String text , boolean comments ){
 
-        this.likedPost = new String[100];
+        this.personLikePost = new String[100];
         this.text = text;
         this.like = 0;
         this.n_comments = 0;
+        this.isValidComment = comments;
         if (comments){
             this.comments = new String[10];
         }else {
@@ -84,20 +85,32 @@ public class Post {
 
     public void likePost(){
 
-        for (int i = 0; i < this.likedPost.length ; i++) {
-            if (likedPost[i] != null && likedPost[i].equals(Authentication.activeId)){
-                System.out.print("you liked this post before.");
+        for (int i = 0; i < this.personLikePost.length ; i++) {
+            if (personLikePost[i] != null && personLikePost[i].equals(Authentication.activeId)){
+                System.out.println("you liked this post before.");
                 return;
             }
         }
         this.like++;
-        for (int i = 0; i < likedPost.length; i++) {
-            if (likedPost[i] == null){
-                likedPost[i] = Authentication.activeId;
+        for (int i = 0; i < personLikePost.length; i++) {
+            if (personLikePost[i] == null){
+                personLikePost[i] = Authentication.activeId;
                 System.out.println("you like this post.");
                 return;
             }
         }
 
+    }
+
+    public void comment(String comment){
+        for (int i = 0; i < this.comments.length; i++) {
+            if (this.comments[i] == null){
+                this.comments[i] = comment;
+                this.n_comments++;
+                System.out.println("your comment added.");
+                return;
+            }
+        }
+        System.err.println("your comment not added.");
     }
 }

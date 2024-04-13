@@ -54,6 +54,7 @@ public class App {
                 return;
             }
         }
+        System.err.println("We can not find any person with that user name!");
     }
 
     public void getTopPost(){

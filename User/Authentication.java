@@ -32,7 +32,7 @@ public class Authentication {
     public void signIn(App app){
 
         try {
-            System.out.print("Please enter your Id: ");
+            System.out.print("Please enter your Username: ");
             String id = Menu.input.next();
             System.out.print("Please enter your password: ");
             String password = Menu.input.next();
@@ -77,11 +77,17 @@ public class Authentication {
         App.menu.start(app);
 
     }
+    public void checkId(){
+
+    }
+    public void checkPassword(){
+
+    }
 
     public void changPassword(App app){
         System.out.print("Enter your new password: ");
         String password1 = Menu.input.next();
-        System.out.print("Enter your new password: ");
+        System.out.print("Enter your new password again: ");
         String password2 = Menu.input.next();
         if (password1.equals(password2)){
             System.out.println("your password changed.");
