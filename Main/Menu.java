@@ -22,7 +22,6 @@ public class Menu {
         System.out.println(Color.RED + str + Color.RESET);
     }
 
-
     public void start(App app){
 
         try {
@@ -194,6 +193,7 @@ public class Menu {
                 break;
             case -8:
                 user.showFollowing();
+                selectFollowing(app,user);
                 break;
         }
     }
@@ -351,7 +351,12 @@ public class Menu {
         try {
             int choice = input.nextInt();
             if (choice > 0 ){
-                showPage(app , user.getPage().getFollower()[choice - 1]);
+                if (user.getPage().getFollower()[choice -1 ] != null ){
+                    showPage(app , user.getPage().getFollower()[choice - 1]);
+                }else {
+                    printWarning();
+                    showPage(app,user);
+                }
             }
             else {
                 showPage(app,user);
@@ -374,6 +379,7 @@ public class Menu {
                     showPage(app , user.getPage().getFollowing()[choice - 1]);
                 }else {
                     printWarning();
+                    showPage(app,user);
                 }
             }
             else {
