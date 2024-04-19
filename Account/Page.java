@@ -84,16 +84,20 @@ public class Page {
 
     //________________________________________ )
 
-    public void showFollower( App app){
+    public void showFollower(){
         System.out.println("Followers:");
         for (int i = 0; i < n_follower; i++) {
-            System.out.printf("[%d]:%s\n",i+1,follower[i].getId());
+            if (follower[i] != null ){
+                System.out.printf("[%d]:%s\n",i+1,follower[i].getId());
+            }
         }
     }
-    public void showFollowing( App app){
+    public void showFollowing(){
         System.out.println("Followings:");
         for (int i = 0; i < n_following; i++) {
-            System.out.printf("[%d]:%s\n",i+1,following[i].getId());
+            if (following[i] != null){
+                System.out.printf("[%d]:%s\n",i+1,following[i].getId());
+            }
         }
     }
 

@@ -12,13 +12,24 @@ public class Menu {
 
     //______________________________________________________
 
+    public void printWarning(){
+        String str ="invalid argument! try again.";
+        System.out.println(Color.YELLOW + str + Color.RESET);
+    }
+
+    public static void printError(){
+        String str = "[ERROR]:check your input argument and try again!";
+        System.out.println(Color.RED + str + Color.RESET);
+    }
+
+
     public void start(App app){
 
-        System.out.print("[0]:Exit.\n[1]:Sign in.\n[2]:Sign up.\nPlease enter your choice: ");
         try {
+            System.out.print("[0]:Exit.\n[1]:Sign in.\n[2]:Sign up.\nPlease enter your choice: ");
             switch (input.nextInt()){
                 case 0:
-                    System.exit(0);//we should test this
+                    System.exit(0);
                 case 1:
                     App.authentication.signIn(app);
                     break;
@@ -26,12 +37,13 @@ public class Menu {
                     App.authentication.signUp(app);
                     break;
                 default:
-                    System.err.print("invalid argument! try again.\n");
+                    printWarning();
                     start(app);
                     break;
             }
         }catch (Exception e){
-            System.err.print("[ERROR]:check your input argument and try again! \n");
+            printError();
+            input.nextLine();
             start(app);
         }
     }
@@ -66,7 +78,7 @@ public class Menu {
 
             }
         }catch (Exception e){
-            System.err.print("[ERROR]:check your input argument and try again! FOOTER\n");
+            printError();
             home(app);
         }
     }
@@ -84,13 +96,13 @@ public class Menu {
                 footer(choice , app);
             }
         }catch (Exception e){
-            System.err.print("[ERROR]:check your input argument and try again! HOME\n");
+            printError();
             home(app);
         }
     }
 
     public void printMyPage(){
-        System.out.print(Color.YELLOW);
+        System.out.print(Color.GREEN);
         System.out.println("[1] Follower: "+ Authentication.activeUser.getPage().getN_follower());
         System.out.println("[2] Following: "+ Authentication.activeUser.getPage().getN_following());
         System.out.println("[3]:Change information\n[4]:My Posts\n[5]:Add new post");
@@ -109,10 +121,10 @@ public class Menu {
             }
             switch (choice){
                 case 1:
-                    Authentication.activeUser.getPage().showFollower(app);
+                    Authentication.activeUser.getPage().showFollower();
                     break;
                 case 2:
-                    Authentication.activeUser.getPage().showFollowing(app);
+                    Authentication.activeUser.getPage().showFollowing();
                     break;
                 case 3:
                     information(app);
@@ -125,12 +137,12 @@ public class Menu {
                     myPage(app);
                     break;
                 default:
-                    System.err.print("invalid argument! try again.\n");
+                    printWarning();
                     home(app);
                     break;
             }
         }catch (Exception e){
-            System.err.print("[ERROR]:check your input argument and try again! MYPAGE\n");
+            printError();
             home(app);
         }
     }
@@ -141,7 +153,7 @@ public class Menu {
             app.searchUser(input.next() , app);
 
         }catch (Exception e){
-            System.err.print("[ERROR]:check your input argument and try again! SEARCH\n");
+            printError();
             home(app);
         }
     }
@@ -170,15 +182,18 @@ public class Menu {
         switch (choice){
             case -5:
                 user.getPage().follow(user);
+                showPage(app,user);
                 break;
             case -6:
                 user.getPage().unfollow();
+                showPage(app,user);
                 break;
             case -7:
-                user.showFollower(app);
+                user.showFollower();
+                selectFollower(app,user);
                 break;
             case -8:
-                user.showFollowing(app);
+                user.showFollowing();
                 break;
         }
     }
@@ -189,12 +204,11 @@ public class Menu {
         System.out.println(user.getPage().getBio());
 
         System.out.print(Color.GREEN);
-        if (user.getId().equals(Authentication.activeId)) {
-            
-        }else {
+        if (!user.getId().equals(Authentication.activeId)) {
             System.out.print("-------- [-5]:Follow -------- [-6]:Unfollow -------- ");
         }
-        System.out.printf("[-7]:Follower: %d -------- [-8]:following: %d -------- \n",user.getPage().getN_follower(),user.getPage().getN_following());
+        System.out.printf("[-7]:Follower: %d -------- [-8]:following: %d -------- \n"
+                ,user.getPage().getN_follower(),user.getPage().getN_following());
         System.out.print(Color.RESET);
     }
 
@@ -213,11 +227,17 @@ public class Menu {
                 exitFromPost(choice - 1 , user , app );
             }
             else {
-                footer(choice,app);
-                headerPage(choice,app,user);
+                if (choice < -8 ){
+                    printWarning();
+                    home(app);
+                }
+                else {
+                    footer(choice,app);
+                    headerPage(choice,app,user);
+                }
             }
         }catch (Exception e){
-            System.err.print("[ERROR]:check your input argument and try again! HOME\n");
+            printError();
             home(app);
         }
     }
@@ -241,18 +261,15 @@ public class Menu {
                     user.getPage().getPosts()[choice].likePost();
                     exitFromPost(choice,user,app);
                 } else if (choice1 == 2) {
-                    System.out.println("CCCCCCCCCCC111111111111111");
                     comment(post,app);
-                    System.out.println("CCCCCCCCCC2222222222222222");
                     exitFromPost(choice,user,app);
-
                 }
             }else {
                 footer(choice1 , app);
             }
 
         }catch (Exception e){
-            System.err.print("[ERROR]:check your input argument and try again! HOME\n");
+            printError();
             home(app);
         }
     }
@@ -299,14 +316,14 @@ public class Menu {
                     Authentication.activeUser.getPage().setBio(input.nextLine());
                     break;
                 default:
-                    System.err.print("invalid argument! try again.\n");
+                    printWarning();
                     information(app);
                     break;
             }
             information(app);
 
         }catch (Exception e){
-            System.err.print("[ERROR]:check your input argument and try again! MYPAGE\n");
+            printError();
             home(app);
         }
 
@@ -321,10 +338,52 @@ public class Menu {
             post.comment(comment);
 
         }catch (Exception e){
-            System.err.print("[ERROR]:check your input argument and try again! COMMENT\n");
+            printError();
             home(app);
         }
 
+
+
+    }
+
+    public void selectFollower(App app , User user){
+        System.out.println("please enter your choice: ");
+        try {
+            int choice = input.nextInt();
+            if (choice > 0 ){
+                showPage(app , user.getPage().getFollower()[choice - 1]);
+            }
+            else {
+                showPage(app,user);
+            }
+
+        }catch (Exception e){
+            printError();
+            home(app);
+        }
+
+
+    }
+
+    public void selectFollowing(App app , User user){
+        System.out.println("please enter your choice: ");
+        try {
+            int choice = input.nextInt();
+            if (choice > 0 ){
+                if (user.getPage().getFollowing()[choice - 1 ] != null){
+                    showPage(app , user.getPage().getFollowing()[choice - 1]);
+                }else {
+                    printWarning();
+                }
+            }
+            else {
+                showPage(app,user);
+            }
+
+        }catch (Exception e){
+            printError();
+            home(app);
+        }
 
 
     }

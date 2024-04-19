@@ -90,11 +90,11 @@ public class User {
     //_______________________________________ )
 
 
-    public void showFollower( App app){
-        page.showFollower(app);
+    public void showFollower(){
+        page.showFollower();
     }
-    public void showFollowing( App app){
-        page.showFollowing(app);
+    public void showFollowing(){
+        page.showFollowing();
     }
 
     public void changeName(){

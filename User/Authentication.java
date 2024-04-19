@@ -1,14 +1,13 @@
 package User;
 import Main.App;
 import Main.Menu;
+import Setting.Color;
 
 public class Authentication {
 
     public static String activeId;
     public static User activeUser ;
 
-    private String collectID;
-    private User collectUser;
 
     //____________________________________ G & S :(
     public String getActiveId() {
@@ -39,7 +38,7 @@ public class Authentication {
             for (int i = 0; i < app.getUsers().length; i++) {
                 if (app.getUsers()[i] != null && app.getUsers()[i].getId().equals(id) ){
                     if (app.getUsers()[i].getPassword().equals(password) ){
-                        System.out.println("your registration has been successful:)");
+                        System.out.println(Color.GREEN + "your registration has been successful:)" + Color.RESET );
                         Authentication.activeId = id;
                         Authentication.activeUser = app.getUsers()[i];
                         App.menu.home(app);
@@ -47,10 +46,10 @@ public class Authentication {
                     }
                 }
             }
-            System.err.println("[ERROR]:Incorrect Password or Id!");
+            System.out.println(Color.RED + "[ERROR]:Incorrect Password or Id!" + Color.RESET );
 
         }catch (Exception e){
-            System.err.print("[ERROR]:check your input argument and try again!\n");
+            System.out.print(Color.RED + "[ERROR]:check your input argument and try again!\n" + Color.RESET);
 
         }finally {
             App.menu.start(app);
@@ -90,10 +89,10 @@ public class Authentication {
         System.out.print("Enter your new password again: ");
         String password2 = Menu.input.next();
         if (password1.equals(password2)){
-            System.out.println("your password changed.");
+            System.out.println(Color.GREEN + "your password changed." + Color.RESET );
         }
         else {
-            System.err.println("[ERROR]:your passwords not same! password do not chang.");
+            System.out.println(Color.RED + "[ERROR]:your passwords not same! password do not chang." + Color.RESET );
         }
 
     }
