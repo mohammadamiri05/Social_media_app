@@ -121,9 +121,11 @@ public class Menu {
             switch (choice){
                 case 1:
                     Authentication.activeUser.getPage().showFollower();
+                    selectFollower(app,Authentication.activeUser);
                     break;
                 case 2:
                     Authentication.activeUser.getPage().showFollowing();
+                    selectFollowing(app,Authentication.activeUser);
                     break;
                 case 3:
                     information(app);
@@ -254,12 +256,12 @@ public class Menu {
             System.out.printf("[2]:comments:%d\t",post.getN_comments());
         }
         if (user.getId().equals(Authentication.activeId)) {
-            System.out.println("[3]:Delete Post.");
+            System.out.print("[3]:Delete Post.");
         }
         System.out.print(Color.RESET);
 
         try {
-            System.out.print("Enter your choice: ");
+            System.out.print("\nEnter your choice: ");
             int choice1 = input.nextInt();
             if (choice1 > 0 ){
                 if (choice1 == 1){
