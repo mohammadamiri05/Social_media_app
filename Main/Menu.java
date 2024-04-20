@@ -179,7 +179,7 @@ public class Menu {
 
     public void printHeaderPage(User user){
         System.out.print(Color.RED);
-        System.out.println(user.getId());
+        System.out.println("@"+user.getId());
         System.out.println(user.getPage().getBio());
 
         System.out.print(Color.GREEN);
@@ -198,7 +198,7 @@ public class Menu {
                 showPage(app,user);
                 break;
             case -6:
-                user.getPage().unfollow();
+                user.getPage().unfollow(user);
                 showPage(app,user);
                 break;
             case -7:
@@ -238,7 +238,7 @@ public class Menu {
             }
         }catch (Exception e){
             printError();
-            home(app);
+            showPage(app,user);
         }
     }
     public void exitFromPost(int choice , User user, App app) {
@@ -248,10 +248,10 @@ public class Menu {
         printFooter();
         post.showPost(user);
 
-        System.out.print(Color.PURPLE);
+        System.out.print(Color.WHITE);
         System.out.printf("[1]:like:%d\t",post.getLike());
         if (post.isValidComment()) {
-            System.out.printf("[2]:comments:%d\n",post.getN_comments());
+            System.out.printf("[2]:comments:%d\t",post.getN_comments());
         }
         if (user.getId().equals(Authentication.activeId)) {
             System.out.println("[3]:Delete Post.");
@@ -269,7 +269,7 @@ public class Menu {
                 } else if (choice1 == 3) {
                     user.getPage().deletePost(choice);
                 }
-                exitFromPost(choice,user,app);
+                showPage(app,Authentication.activeUser);
             }else {
                 footer(choice1 , app);
             }
@@ -353,19 +353,20 @@ public class Menu {
     }
 
     public void selectFollower(App app , User user){
-        System.out.println("please enter your choice: ");
+        System.out.print("please enter your choice: ");
         try {
             int choice = input.nextInt();
             if (choice > 0 ){
-                if (user.getPage().getFollower()[choice -1 ] != null ){
+                if (user.getPage().getFollower()[choice - 1 ] != null ){
                     showPage(app , user.getPage().getFollower()[choice - 1]);
                 }else {
                     printWarning();
                     showPage(app,user);
                 }
-            }
-            else {
+            } else if (choice == 0 ) {
                 showPage(app,user);
+            } else {
+                footer(choice,app);
             }
 
         }catch (Exception e){

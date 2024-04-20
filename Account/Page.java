@@ -14,11 +14,11 @@ public class Page {
     private int n_following;
 
 
-    public Page( int nPost , int nFollower , int nFollowing ){
-        this.bio = "Bio";
-        this.posts = new Post[nPost];
-        this.follower = new User[nFollower];
-        this.following = new User[nFollowing];
+    public Page(){
+        this.bio = Config.DEFAULT_BIO;
+        this.posts = new Post[Config.MAX_POST];
+        this.follower = new User[Config.MAX_FOLLOWER];
+        this.following = new User[Config.MAX_FOLLOWING];
     }
 
 
@@ -119,11 +119,13 @@ public class Page {
         }
     }
 
-    public void unfollow(){
+    public void unfollow(User user){
         for (int i = 0; i < follower.length; i++) {
             if (follower[i] != null ) {
                 if (follower[i].getId().equals(Authentication.activeId)) {
                     follower[i] = null;
+                    n_follower--;
+                    Authentication.activeUser.getPage().unFollowing(user);
                     System.out.println(Color.GREEN + "you unfollow page" + Color.RESET);
                     return;
                 }
@@ -137,7 +139,19 @@ public class Page {
         following[n_following] = user;
         n_following++;
     }
+    public void unFollowing(User user){
+        for (int i = 0; i < following.length; i++) {
+            if (following[i] != null) {
+                if (following[i].getId().equals(user.getId())) {
+                    following[i] = null;
+                    n_following--;
+                    return;
 
+                }
+            }
+
+        }
+    }
 
     public void addPost(String text , boolean comments){
         this.posts[n_post] = new Post(text , comments);

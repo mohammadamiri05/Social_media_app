@@ -81,10 +81,10 @@ public class Post {
 
     public void showPost(User user){
         System.out.print(Color.RED);
-        System.out.println(user.getId());
+        System.out.println("@"+user.getId());
         System.out.print(Color.BLUE);
         System.out.println(this.text);
-        System.out.print(Color.YELLOW);
+        System.out.print(Color.PURPLE);
         System.out.println("_________________________________________________");
         if (this.comments.length < 3 ){
             System.out.println(Color.YELLOW + "you could not send any comments for this post."+ Color.RESET);
@@ -103,7 +103,9 @@ public class Post {
 
         for (int i = 0; i < this.personLikePost.length ; i++) {
             if (personLikePost[i] != null && personLikePost[i].equals(Authentication.activeId)){
-                System.out.println("you liked this post before.");
+                personLikePost[i] = null;
+                this.like--;
+                System.out.println(Color.GREEN+"you unlike this post."+Color.RESET);
                 return;
             }
         }
@@ -111,7 +113,7 @@ public class Post {
         for (int i = 0; i < personLikePost.length; i++) {
             if (personLikePost[i] == null){
                 personLikePost[i] = Authentication.activeId;
-                System.out.println("you like this post.");
+                System.out.println(Color.GREEN + "you like this post." + Color.RESET);
                 return;
             }
         }

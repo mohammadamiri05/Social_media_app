@@ -89,10 +89,11 @@ public class Authentication {
         System.out.print("Enter your new password again: ");
         String password2 = Menu.input.next();
         if (password1.equals(password2)){
+            this.getActiveUser().setPassword(password2);
             System.out.println(Color.GREEN + "your password changed." + Color.RESET );
         }
         else {
-            System.out.println(Color.RED + "[ERROR]:your passwords not same! password do not chang." + Color.RESET );
+            System.out.println(Color.RED + "[ERROR]:your passwords not same! password do not change." + Color.RESET );
         }
 
     }
