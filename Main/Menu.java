@@ -152,6 +152,7 @@ public class Menu {
         try {
             System.out.print("Please enter that page id: ");
             app.searchUser(input.next() , app);
+            home(app);
 
         }catch (Exception e){
             printError();
@@ -271,7 +272,7 @@ public class Menu {
                 } else if (choice1 == 3) {
                     user.getPage().deletePost(choice);
                 }
-                showPage(app,Authentication.activeUser);
+                showPage(app,user);
             }else {
                 footer(choice1 , app);
             }

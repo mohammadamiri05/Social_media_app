@@ -1,5 +1,6 @@
 package Main;
 import Account.*;
+import Setting.Color;
 import User.*;
 
 public class App {
@@ -54,7 +55,7 @@ public class App {
                 return;
             }
         }
-        System.err.println("We can not find any person with that user name!");
+        System.out.println(Color.RED + "We can not find any person with that user name!" + Color.RESET);
     }
 
     public void getTopPost(){
