@@ -17,6 +17,11 @@ public class Config {
     public static int MAX_FOLLOWER = 100;
     public static int MAX_FOLLOWING = 100;
 
+    // _______________________ Main :
+
+    public static int MAX_USER = 100;
+    public static int MAX_TOP_POST = 5;
+
 
 
 
