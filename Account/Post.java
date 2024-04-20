@@ -14,13 +14,13 @@ public class Post {
 
     public Post(String text , boolean comments ){
 
-        this.personLikePost = new String[100];
+        this.personLikePost = new String[Config.MAX_PERSON_LIKE_POST];
         this.text = text;
         this.like = 0;
         this.n_comments = 0;
         this.isValidComment = comments;
         if (comments){
-            this.comments = new String[10];
+            this.comments = new String[Config.MAX_COMMENTS];
         }else {
             this.comments = new String[1];
         }
@@ -60,6 +60,22 @@ public class Post {
         this.n_comments = n_comments;
     }
 
+    public String[] getPersonLikePost() {
+        return personLikePost;
+    }
+
+    public void setPersonLikePost(String[] personLikePost) {
+        this.personLikePost = personLikePost;
+    }
+
+    public boolean isValidComment() {
+        return isValidComment;
+    }
+
+    public void setValidComment(boolean validComment) {
+        isValidComment = validComment;
+    }
+
     //_____________________________________________________ )
 
 
@@ -71,7 +87,7 @@ public class Post {
         System.out.print(Color.YELLOW);
         System.out.println("_________________________________________________");
         if (this.comments.length < 3 ){
-            System.out.println("you could not send any comments for this post.");
+            System.out.println(Color.YELLOW + "you could not send any comments for this post."+ Color.RESET);
             return;
         }
         for (int i = 0; i < this.comments.length; i++) {

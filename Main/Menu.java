@@ -177,6 +177,20 @@ public class Menu {
         }
     }
 
+    public void printHeaderPage(User user){
+        System.out.print(Color.RED);
+        System.out.println(user.getId());
+        System.out.println(user.getPage().getBio());
+
+        System.out.print(Color.GREEN);
+        if (!user.getId().equals(Authentication.activeId)) {
+            System.out.print("-------- [-5]:Follow -------- [-6]:Unfollow -------- ");
+        }
+        System.out.printf("[-7]:Follower: %d -------- [-8]:following: %d -------- \n"
+                ,user.getPage().getN_follower(),user.getPage().getN_following());
+        System.out.print(Color.RESET);
+    }
+
     public void headerPage(int choice , App app , User user){
         switch (choice){
             case -5:
@@ -196,20 +210,6 @@ public class Menu {
                 selectFollowing(app,user);
                 break;
         }
-    }
-
-    public void printHeaderPage(User user){
-        System.out.print(Color.RED);
-        System.out.println(user.getId());
-        System.out.println(user.getPage().getBio());
-
-        System.out.print(Color.GREEN);
-        if (!user.getId().equals(Authentication.activeId)) {
-            System.out.print("-------- [-5]:Follow -------- [-6]:Unfollow -------- ");
-        }
-        System.out.printf("[-7]:Follower: %d -------- [-8]:following: %d -------- \n"
-                ,user.getPage().getN_follower(),user.getPage().getN_following());
-        System.out.print(Color.RESET);
     }
 
     public void showPage(App app , User user){
@@ -250,7 +250,12 @@ public class Menu {
 
         System.out.print(Color.PURPLE);
         System.out.printf("[1]:like:%d\t",post.getLike());
-        System.out.printf("[2]:comments:%d\n",post.getN_comments());
+        if (post.isValidComment()) {
+            System.out.printf("[2]:comments:%d\n",post.getN_comments());
+        }
+        if (user.getId().equals(Authentication.activeId)) {
+            System.out.println("[3]:Delete Post.");
+        }
         System.out.print(Color.RESET);
 
         try {
@@ -258,12 +263,13 @@ public class Menu {
             int choice1 = input.nextInt();
             if (choice1 > 0 ){
                 if (choice1 == 1){
-                    user.getPage().getPosts()[choice].likePost();
-                    exitFromPost(choice,user,app);
-                } else if (choice1 == 2) {
+                    post.likePost();
+                } else if ( post.isValidComment() && choice1 == 2) {
                     comment(post,app);
-                    exitFromPost(choice,user,app);
+                } else if (choice1 == 3) {
+                    user.getPage().deletePost(choice);
                 }
+                exitFromPost(choice,user,app);
             }else {
                 footer(choice1 , app);
             }

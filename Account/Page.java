@@ -105,26 +105,37 @@ public class Page {
         for (int i = 0; i < follower.length; i++) {
             if (follower[i] != null){
                 if ( follower[i].getId().equals(Authentication.activeId)) {
-                    System.out.println("you follow this page before!");
+                    System.out.println(Color.YELLOW +"you follow this page before!" + Color.RESET);
                     break;
                 }
             }else {
                 follower[n_follower] = Authentication.activeUser;
                 n_follower++;
                 Authentication.activeUser.getPage().following(user);
-                System.out.println("you follow page.");
+                System.out.println( Color.GREEN +"you follow page." + Color.RESET);
                 break;
             }
+
         }
+    }
+
+    public void unfollow(){
+        for (int i = 0; i < follower.length; i++) {
+            if (follower[i] != null ) {
+                if (follower[i].getId().equals(Authentication.activeId)) {
+                    follower[i] = null;
+                    System.out.println(Color.GREEN + "you unfollow page" + Color.RESET);
+                    return;
+                }
+            }
+        }
+        System.out.println(Color.YELLOW + "you don not follow this page before" + Color.RESET);
+
     }
 
     public void following(User user){
         following[n_following] = user;
         n_following++;
-    }
-
-    public void unfollow(){
-
     }
 
 
@@ -134,8 +145,9 @@ public class Page {
 
     }
 
-    public void deletePost(){
-
+    public void deletePost( int n_post){
+        this.posts[n_post] = null;
+        System.out.println(Color.GREEN + "you delete post." + Color.RESET);
     }
 
     public void showAllPost(){
