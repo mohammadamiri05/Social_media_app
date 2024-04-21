@@ -56,6 +56,7 @@ public class Menu {
         System.out.print(Color.RESET);
     }
     public void footer( int choice , App app){
+        String s = String.valueOf(choice);
         try {
             switch (choice){
                 case 0:
@@ -84,8 +85,8 @@ public class Menu {
 
     public void home(App app){
         printFooter();
-
         System.out.print("Please enter your choice: ");
+
         try {
             int choice = input.nextInt();
             if(choice > 0 ){
@@ -96,6 +97,7 @@ public class Menu {
             }
         }catch (Exception e){
             printError();
+            input.next();
             home(app);
         }
     }
@@ -144,6 +146,7 @@ public class Menu {
             }
         }catch (Exception e){
             printError();
+            input.next();
             home(app);
         }
     }
@@ -156,6 +159,7 @@ public class Menu {
 
         }catch (Exception e){
             printError();
+            input.next();
             home(app);
         }
     }
@@ -241,6 +245,7 @@ public class Menu {
             }
         }catch (Exception e){
             printError();
+            input.next();
             showPage(app,user);
         }
     }
@@ -279,6 +284,7 @@ public class Menu {
 
         }catch (Exception e){
             printError();
+            input.next();
             home(app);
         }
     }
@@ -364,16 +370,19 @@ public class Menu {
                     showPage(app , user.getPage().getFollower()[choice - 1]);
                 }else {
                     printWarning();
+                    if (Authentication.activeId.equals(user.getId())) {
+                        home(app);
+                    }else {
                     showPage(app,user);
+                    }
                 }
-            } else if (choice == 0 ) {
-                showPage(app,user);
             } else {
                 footer(choice,app);
             }
 
         }catch (Exception e){
             printError();
+            input.next();
             home(app);
         }
 
@@ -381,7 +390,7 @@ public class Menu {
     }
 
     public void selectFollowing(App app , User user){
-        System.out.println("please enter your choice: ");
+        System.out.print("please enter your choice: ");
         try {
             int choice = input.nextInt();
             if (choice > 0 ){
@@ -389,15 +398,20 @@ public class Menu {
                     showPage(app , user.getPage().getFollowing()[choice - 1]);
                 }else {
                     printWarning();
+                    if (Authentication.activeId.equals(user.getId())) {
+                        home(app);
+                    }else {
                     showPage(app,user);
+                    }
                 }
+            }else {
+                footer(choice,app);
             }
-            else {
-                showPage(app,user);
-            }
+
 
         }catch (Exception e){
             printError();
+            input.next();
             home(app);
         }
 
