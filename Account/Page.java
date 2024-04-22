@@ -160,6 +160,12 @@ public class Page {
 
     public void deletePost( int n_post){
         this.posts[n_post] = null;
+        for (int i = n_post; i < posts.length - 1 ; i++) {
+            if (posts[i+1] != null){
+                posts[i] = posts[i+1];
+                posts[ i+1 ] = null;
+            }
+        }
         System.out.println(Color.GREEN + "you delete post." + Color.RESET);
     }
 

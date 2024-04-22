@@ -294,7 +294,8 @@ public class Menu {
         System.out.printf("[1]:%s\n",Authentication.activeUser.getName());
         System.out.printf("[2]:%s\n[3]:change password\n",Authentication.activeUser.getLast_name());
         System.out.printf("[4]:%s\n",Authentication.activeUser.getEmail());
-        System.out.printf("[5]:%s\n",Authentication.activeUser.getPage().getBio());
+        System.out.printf("[5]:Bio:%s\n",Authentication.activeUser.getPage().getBio());
+        System.out.println("[6]:Delete account.");
         System.out.print(Color.RESET);
     }
 
@@ -330,6 +331,9 @@ public class Menu {
                     input.nextLine();
                     Authentication.activeUser.getPage().setBio(input.nextLine());
                     break;
+                case 6:
+                    app.deleteUser();
+                    start(app);
                 default:
                     printWarning();
                     information(app);

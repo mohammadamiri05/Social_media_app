@@ -75,6 +75,22 @@ public class App {
             }
         }
     }
+    
+    public void deleteUser(){
+
+        for (int i = 0; i < users.length; i++) {
+            if (users[i] != null && users[i].getId().equals(Authentication.activeId)){
+                users[i] = null;
+                for (int j = i; j <users.length - 1 ; j++) {
+                    if (users[j+1] != null){
+                        users[j] = users[j+1];
+                        users[j+1] = null;
+                    }
+                }
+            }
+        }
+
+    }
 
 
 

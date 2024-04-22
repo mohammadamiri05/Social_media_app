@@ -79,8 +79,18 @@ public class Authentication {
     public void checkId(){
 
     }
-    public void checkPassword(){
-
+    public void checkPassword(App app , String id , String password){
+        for (int i = 0; i < app.getUsers().length; i++) {
+            if (app.getUsers()[i] != null && app.getUsers()[i].getId().equals(id) ){
+                if (app.getUsers()[i].getPassword().equals(password) ){
+                    System.out.println(Color.GREEN + "your registration has been successful:)" + Color.RESET );
+                    Authentication.activeId = id;
+                    Authentication.activeUser = app.getUsers()[i];
+                    App.menu.home(app);
+                    return;
+                }
+            }
+        }
     }
 
     public void changPassword(App app){
@@ -97,4 +107,21 @@ public class Authentication {
         }
 
     }
+
+    public void deleteAccount(App app){
+        for (int i = 0; i < app.getUsers().length; i++) {
+            if (app.getUsers()[i].getId().equals(activeId)){
+                app.getUsers()[i] = null;
+                for (int j = i; j <app.getUsers().length ; j++) {
+                    if (app.getUsers()[i+1] != null){
+
+                    }
+                }
+            }
+        }
+
+    }
+
+
+
 }
